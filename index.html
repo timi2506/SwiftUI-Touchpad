@@ -33,6 +33,11 @@
             padding: 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         .logo {
             height: 40px;
             border-radius: 10px;
@@ -90,8 +95,10 @@
 </head>
 <body>
     <div class="top-bar">
-        <img src="https://github.com/timi2506/RAW-files-i-need-for-stuff/blob/main/TouchPadExample.png?raw=true" alt="Touchpad Logo" class="logo">
-        <h1>Touchpad</h1>
+        <div class="logo-title">
+            <img src="https://github.com/timi2506/RAW-files-i-need-for-stuff/blob/main/TouchPadExample.png?raw=true" alt="Touchpad Logo" class="logo">
+            <h1>Touchpad</h1>
+        </div>
         <div class="chip" id="themeChip">Theme: <span id="currentTheme">Automatic</span>
             <div class="chip-options">
                 <div class="chip-option" onclick="setTheme('automatic')">Automatic</div>
