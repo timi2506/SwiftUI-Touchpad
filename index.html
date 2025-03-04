@@ -43,7 +43,7 @@
             height: 40px;
             border-radius: 10px;
         }
-        .theme-chip {
+        .get-chip {
             position: relative;
             display: inline-block;
             padding: 8px 12px;
@@ -60,10 +60,6 @@
             border-radius: 8px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             padding: 10px;
-        }
-        .theme-chip.active .theme-options {
-            display: flex;
-            gap: 10px;
         }
         .theme-icon {
             width: 32px;
@@ -105,13 +101,8 @@
             <img src="https://github.com/timi2506/RAW-files-i-need-for-stuff/blob/main/TouchPadExample.png?raw=true" alt="Touchpad Logo" class="logo">
             <h1>Touchpad</h1>
         </div>
-        <div class="theme-chip" onclick="toggleThemeMenu()">
-            🎨
-            <div class="theme-options">
-                <div class="theme-icon" id="autoTheme" onclick="setTheme('auto')">🌗</div>
-                <div class="theme-icon" id="lightTheme" onclick="setTheme('light')">☀️</div>
-                <div class="theme-icon" id="darkTheme" onclick="setTheme('dark')">🌙</div>
-            </div>
+        <div class="get-chip" onclick="window.location.href='https://github.com/timi2506/Touchpad';">
+            Download
         </div>
     </div>
     
@@ -149,9 +140,6 @@
         </ul>
     </div>
     <script>
-        function toggleThemeMenu() {
-            document.querySelector(".theme-chip").classList.toggle("active");
-        }
         function setTheme(theme) {
             if (theme === "auto") {
                 document.documentElement.removeAttribute("data-theme");
