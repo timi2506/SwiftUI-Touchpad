@@ -35,21 +35,17 @@
             width: 140px;
             border-radius: 10px;
         }
-        code {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px;
-            border-radius: 5px;
-            font-family: monospace;
-            display: block;
-            text-align: left;
-            white-space: pre-wrap;
-            overflow-x: auto;
-        }
         pre {
             background: rgba(255, 255, 255, 0.1);
             padding: 10px;
             border-radius: 8px;
             overflow-x: auto;
+            text-align: left;
+        }
+        code {
+            font-family: monospace;
+            white-space: pre-wrap;
+            display: block;
         }
         a {
             color: #007aff;
@@ -101,16 +97,6 @@
             </div>
         </div>
         
-        <h2>Showcase</h2>
-        <p>Examples of this package can be seen in <a href="https://github.com/timi2506/Touchpad-Example">this Example Project</a>.</p>
-        
-        <h2>Installation</h2>
-        <p>Using Xcode's built-in Package Manager:</p>
-        <p>Go to <strong>File > Add Package Dependencies...</strong></p>
-        <p>Then, enter:</p>
-        <code>https://github.com/timi2506/Touchpad.git</code>
-        <p>and press "Add Package" and link it to your target.</p>
-        
         <h2>Usage</h2>
         <h3>TouchpadView</h3>
         <pre><code class="language-swift">TouchpadView(buttons: [
@@ -119,18 +105,19 @@
     })
 ], touchPadLabel: "Touchpad")</code></pre>
         
-        <h2>Issues or Questions</h2>
-        <p>If you have any issues or questions, feel free to open an <a href="https://github.com/timi2506/Touchpad/issues/new/choose">issue</a> or contact me on <a href="https://x.com/timi2506">Twitter</a>.</p>
-    </div>
-    <script>
-        document.getElementById("themeChip").addEventListener("click", function() {
-            this.classList.toggle("expanded");
-        });
-
-        function setTheme(theme) {
-            document.getElementById("currentTheme").innerText = theme.charAt(0).toUpperCase() + theme.slice(1);
-            document.getElementById("themeChip").classList.remove("expanded");
-        }
-    </script>
-</body>
-</html>
+        <h3>Recommended Usecases:</h3>
+        <ul>
+            <li>✅ in NavigationLinks</li>
+            <li>✅ in Sheets</li>
+            <li>❌ inside another View</li>
+        </ul>
+        
+        <h3>TouchpadButton</h3>
+        <pre><code class="language-swift">TouchpadButton(id: "button1", text: "Button1", symbolName: "apple.logo", boundaries: CGRect(x: 100, y: 100, width: 100, height: 100), action: {
+    print("button 1 pressed")
+})</code></pre>
+        
+        <h3>Properties</h3>
+        <ul>
+            <li><strong>id</strong> (Required) - Unique identifier for each button.</li>
+            <li><strong>text</strong> (Semi-Optional)
