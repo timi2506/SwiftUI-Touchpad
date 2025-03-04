@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Touchpad - A Swift Package</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <style>
         :root {
             --bg-color: #f5f5f7;
@@ -21,45 +24,26 @@
             padding: 0;
             background: var(--bg-color);
             color: var(--text-color);
-            text-align: center;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
-        h1 {
-            font-size: 2.5rem;
-        }
-        .logo {
-            width: 140px;
-            border-radius: 10px;
-        }
-        pre {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            overflow-x: auto;
             text-align: left;
         }
-        code {
-            font-family: monospace;
-            white-space: pre-wrap;
-            display: block;
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        a {
-            color: #007aff;
-            text-decoration: none;
+        .logo {
+            height: 40px;
+            border-radius: 10px;
         }
         .chip {
-            display: inline-block;
             padding: 8px 16px;
             border-radius: 16px;
             background: rgba(255, 255, 255, 0.2);
             cursor: pointer;
-            margin: 10px;
-            position: relative;
             transition: all 0.3s ease;
+            position: relative;
         }
         .chip.expanded {
             padding: 16px;
@@ -67,7 +51,13 @@
         }
         .chip-options {
             display: none;
-            margin-top: 10px;
+            position: absolute;
+            background: var(--bg-color);
+            padding: 8px;
+            border-radius: 8px;
+            top: 40px;
+            left: 0;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
         .chip.expanded .chip-options {
             display: block;
@@ -76,19 +66,32 @@
             padding: 5px 10px;
             border-radius: 10px;
             cursor: pointer;
-            margin: 5px;
             transition: background 0.2s;
         }
         .chip-option.selected {
             background: rgba(0, 0, 0, 0.1);
         }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        pre {
+            padding: 10px;
+            border-radius: 8px;
+            overflow-x: auto;
+            text-align: left;
+        }
+        a {
+            color: #007aff;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="top-bar">
         <img src="https://github.com/timi2506/RAW-files-i-need-for-stuff/blob/main/TouchPadExample.png?raw=true" alt="Touchpad Logo" class="logo">
         <h1>Touchpad</h1>
-        
         <div class="chip" id="themeChip">Theme: <span id="currentTheme">Automatic</span>
             <div class="chip-options">
                 <div class="chip-option" onclick="setTheme('automatic')">Automatic</div>
@@ -96,11 +99,13 @@
                 <div class="chip-option" onclick="setTheme('dark')">Dark</div>
             </div>
         </div>
-        
+    </div>
+    
+    <div class="container">
         <h2>Usage</h2>
         <h3>TouchpadView</h3>
         <pre><code class="language-swift">TouchpadView(buttons: [
-   TouchpadButton(id: "button1", text: "Button1", symbolName: "apple.logo", boundaries: CGRect(x: 100, y: 100, width: 100, height: 100), action: {
+    TouchpadButton(id: "button1", text: "Button1", symbolName: "apple.logo", boundaries: CGRect(x: 100, y: 100, width: 100, height: 100), action: {
         print("button 1 pressed")
     })
 ], touchPadLabel: "Touchpad")</code></pre>
@@ -120,4 +125,27 @@
         <h3>Properties</h3>
         <ul>
             <li><strong>id</strong> (Required) - Unique identifier for each button.</li>
-            <li><strong>text</strong> (Semi-Optional)
+            <li><strong>text</strong> (Semi-Optional) - Button's text label.</li>
+            <li><strong>symbolName</strong> (Semi-Optional) - SF Symbol name for the button image.</li>
+            <li><strong>boundaries</strong> (Required) - CGRect defining button placement and tap area.</li>
+            <li><strong>action</strong> (Semi-Optional) - Action executed when tapped.</li>
+            <li><strong>border</strong> (Required) - Toggles visibility of the tap area border.</li>
+            <li><strong>borderColor</strong> (Optional, Default: red) - Border color.</li>
+            <li><strong>borderRadius</strong> (Optional, Default: 0) - Corner radius of the border.</li>
+        </ul>
+        
+        <h2>Issues or Questions</h2>
+        <p>If you have any issues or questions, feel free to open an <a href="https://github.com/timi2506/Touchpad/issues/new/choose">issue</a> or contact me on <a href="https://x.com/timi2506">Twitter</a>.</p>
+    </div>
+    <script>
+        document.getElementById("themeChip").addEventListener("click", function() {
+            this.classList.toggle("expanded");
+        });
+
+        function setTheme(theme) {
+            document.getElementById("currentTheme").innerText = theme.charAt(0).toUpperCase() + theme.slice(1);
+            document.getElementById("themeChip").classList.remove("expanded");
+        }
+    </script>
+</body>
+</html>
