@@ -42,39 +42,22 @@
             height: 40px;
             border-radius: 10px;
         }
-        .chip {
-            padding: 8px 16px;
-            border-radius: 16px;
+        .theme-selector {
+            display: flex;
+            gap: 10px;
+        }
+        .theme-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .theme-icon.selected {
             background: rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .chip.expanded {
-            padding: 16px;
-            background: rgba(255, 255, 255, 0.3);
-        }
-        .chip-options {
-            display: none;
-            position: absolute;
-            background: var(--bg-color);
-            padding: 8px;
-            border-radius: 8px;
-            top: 40px;
-            left: 0;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .chip.expanded .chip-options {
-            display: block;
-        }
-        .chip-option {
-            padding: 5px 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .chip-option.selected {
-            background: rgba(0, 0, 0, 0.1);
         }
         .container {
             max-width: 900px;
@@ -86,6 +69,10 @@
             border-radius: 8px;
             overflow-x: auto;
             text-align: left;
+            scrollbar-width: none;
+        }
+        pre::-webkit-scrollbar {
+            display: none;
         }
         a {
             color: #007aff;
@@ -99,12 +86,10 @@
             <img src="https://github.com/timi2506/RAW-files-i-need-for-stuff/blob/main/TouchPadExample.png?raw=true" alt="Touchpad Logo" class="logo">
             <h1>Touchpad</h1>
         </div>
-        <div class="chip" id="themeChip">Theme: <span id="currentTheme">Automatic</span>
-            <div class="chip-options">
-                <div class="chip-option" onclick="setTheme('automatic')">Automatic</div>
-                <div class="chip-option" onclick="setTheme('light')">Light</div>
-                <div class="chip-option" onclick="setTheme('dark')">Dark</div>
-            </div>
+        <div class="theme-selector">
+            <div class="theme-icon" id="autoTheme" onclick="setTheme('auto')">🌗</div>
+            <div class="theme-icon" id="lightTheme" onclick="setTheme('light')">☀️</div>
+            <div class="theme-icon" id="darkTheme" onclick="setTheme('dark')">🌙</div>
         </div>
     </div>
     
@@ -145,14 +130,21 @@
         <p>If you have any issues or questions, feel free to open an <a href="https://github.com/timi2506/Touchpad/issues/new/choose">issue</a> or contact me on <a href="https://x.com/timi2506">Twitter</a>.</p>
     </div>
     <script>
-        document.getElementById("themeChip").addEventListener("click", function() {
-            this.classList.toggle("expanded");
-        });
-
         function setTheme(theme) {
-            document.getElementById("currentTheme").innerText = theme.charAt(0).toUpperCase() + theme.slice(1);
-            document.getElementById("themeChip").classList.remove("expanded");
+            document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+            updateThemeSelection(theme);
         }
+        function updateThemeSelection(theme) {
+            document.getElementById("autoTheme").classList.remove("selected");
+            document.getElementById("lightTheme").classList.remove("selected");
+            document.getElementById("darkTheme").classList.remove("selected");
+            document.getElementById(theme + "Theme").classList.add("selected");
+        }
+        (function() {
+            const savedTheme = localStorage.getItem("theme") || "auto";
+            setTheme(savedTheme);
+        })();
     </script>
 </body>
 </html>
