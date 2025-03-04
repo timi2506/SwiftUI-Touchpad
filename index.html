@@ -102,7 +102,7 @@
             <h1>Touchpad</h1>
         </div>
         <div class="get-chip" onclick="window.location.href='https://github.com/timi2506/Touchpad';">
-            Download
+            View on GitHub
         </div>
     </div>
     
@@ -138,27 +138,10 @@
             <li><strong>borderColor</strong> (Optional, Default: red) - Border color.</li>
             <li><strong>borderRadius</strong> (Optional, Default: 0) - Corner radius of the border.</li>
         </ul>
+        <h3>More Info</h3>
+        <ul>
+            <li>For More Info Check out the GitHub by clicking the Button above</li>
+        </ul>
     </div>
-    <script>
-        function setTheme(theme) {
-            if (theme === "auto") {
-                document.documentElement.removeAttribute("data-theme");
-            } else {
-                document.documentElement.setAttribute("data-theme", theme);
-            }
-            localStorage.setItem("theme", theme);
-            updateThemeSelection(theme);
-        }
-        function updateThemeSelection(theme) {
-            document.getElementById("autoTheme").classList.remove("selected");
-            document.getElementById("lightTheme").classList.remove("selected");
-            document.getElementById("darkTheme").classList.remove("selected");
-            document.getElementById(theme + "Theme").classList.add("selected");
-        }
-        (function() {
-            const savedTheme = localStorage.getItem("theme") || "auto";
-            setTheme(savedTheme);
-        })();
-    </script>
 </body>
 </html>
