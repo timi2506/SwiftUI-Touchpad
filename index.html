@@ -39,10 +39,52 @@
             background: rgba(255, 255, 255, 0.1);
             padding: 5px;
             border-radius: 5px;
+            font-family: monospace;
+            display: block;
+            text-align: left;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+        pre {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            overflow-x: auto;
         }
         a {
             color: #007aff;
             text-decoration: none;
+        }
+        .chip {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            margin: 10px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .chip.expanded {
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .chip-options {
+            display: none;
+            margin-top: 10px;
+        }
+        .chip.expanded .chip-options {
+            display: block;
+        }
+        .chip-option {
+            padding: 5px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.2s;
+        }
+        .chip-option.selected {
+            background: rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -50,6 +92,14 @@
     <div class="container">
         <img src="https://github.com/timi2506/RAW-files-i-need-for-stuff/blob/main/TouchPadExample.png?raw=true" alt="Touchpad Logo" class="logo">
         <h1>Touchpad</h1>
+        
+        <div class="chip" id="themeChip">Theme: <span id="currentTheme">Automatic</span>
+            <div class="chip-options">
+                <div class="chip-option" onclick="setTheme('automatic')">Automatic</div>
+                <div class="chip-option" onclick="setTheme('light')">Light</div>
+                <div class="chip-option" onclick="setTheme('dark')">Dark</div>
+            </div>
+        </div>
         
         <h2>Showcase</h2>
         <p>Examples of this package can be seen in <a href="https://github.com/timi2506/Touchpad-Example">this Example Project</a>.</p>
@@ -63,7 +113,7 @@
         
         <h2>Usage</h2>
         <h3>TouchpadView</h3>
-        <pre><code>TouchpadView(buttons: [
+        <pre><code class="language-swift">TouchpadView(buttons: [
    TouchpadButton(id: "button1", text: "Button1", symbolName: "apple.logo", boundaries: CGRect(x: 100, y: 100, width: 100, height: 100), action: {
         print("button 1 pressed")
     })
@@ -72,5 +122,15 @@
         <h2>Issues or Questions</h2>
         <p>If you have any issues or questions, feel free to open an <a href="https://github.com/timi2506/Touchpad/issues/new/choose">issue</a> or contact me on <a href="https://x.com/timi2506">Twitter</a>.</p>
     </div>
+    <script>
+        document.getElementById("themeChip").addEventListener("click", function() {
+            this.classList.toggle("expanded");
+        });
+
+        function setTheme(theme) {
+            document.getElementById("currentTheme").innerText = theme.charAt(0).toUpperCase() + theme.slice(1);
+            document.getElementById("themeChip").classList.remove("expanded");
+        }
+    </script>
 </body>
 </html>
